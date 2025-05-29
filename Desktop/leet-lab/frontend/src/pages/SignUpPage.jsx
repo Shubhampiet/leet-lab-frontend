@@ -9,6 +9,7 @@ import {
   Loader2,
   Lock,
   Mail,
+  User
 } from "lucide-react";
 
 import {z} from "zod";
@@ -24,7 +25,7 @@ const signUpSchema = z.object({
 
 const SignUpPage = () =>{
   const [showPassword, setShowPassword] = useState(false)
-  const {signUp, isSigningUp} = useAuthStore()
+  const {signup, isSigningUp} = useAuthStore()
   
   const {register, handleSubmit,formState:{errors},}=useForm({
     resolver:zodResolver(signUpSchema)
@@ -32,7 +33,7 @@ const SignUpPage = () =>{
 
 const onSubmit = async (data)=>{
   try {
-    await signUp(data)
+    await signup(data)
   } catch (error) {
     console.error("Signup failed:",error)
   }
@@ -63,7 +64,7 @@ return (
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Code className="h-5 w-5 text-base-content/40" />
+                <User className="h-5 w-5 text-base-content/40" />
               </div>
               <input
                 type="text"

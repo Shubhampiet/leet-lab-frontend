@@ -1,5 +1,8 @@
 //Api urls
 
+//proxy url
+export const PROXY_URL = "/api/v1"
+
 //Authentication
 export const AUTH = "/auth";
 export const CHECK_URL = AUTH + "/check";
