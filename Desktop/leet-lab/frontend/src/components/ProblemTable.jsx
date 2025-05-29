@@ -22,18 +22,15 @@ const ProblemTable = ({ problems }) => {
     return Array.from(tagsSet);
   }, [problems]);
 
-  const filteredProblems = useMemo(() => {
+
+  const filteredProblems = useMemo(()=>{
     return (problems || [])
-      .filter((problem) =>
-        problem.title.toLowerCase().includes(search.toLowerCase())
-      )
-      .filter((problem) =>
-        difficulty === "ALL" ? true : problem.difficulty === difficulty
-      )
-      .filter((problem) =>
+    .filter((problem)=> problem.title.toLowerCase().includes(search.toLowerCase()))
+    .filter((problem)=>difficulty === "ALL" ? true: problem.difficulty === difficulty)
+     .filter((problem) =>
         selectedTag === "ALL" ? true : problem.tags?.includes(selectedTag)
       );
-  }, [problems, search, difficulty, selectedTag]);
+  },[problems , search , difficulty , selectedTag])
 
   const itemsPerPage = 5;
   const totalPages = Math.ceil(filteredProblems.length / itemsPerPage);
@@ -44,11 +41,12 @@ const ProblemTable = ({ problems }) => {
     );
   }, [filteredProblems, currentPage]);
 
+
   const difficulties = ["EASY", "MEDIUM", "HARD"];
 
-  const handleDelete = (id) => {};
+  const handleDelete = (id)=>{}
 
-  const handleAddToPlaylist = (id) => {};
+  const handleAddToPlaylist = (id)=>{}
 
   return (
     <div className="w-full max-w-6xl mx-auto mt-10">
@@ -106,13 +104,12 @@ const ProblemTable = ({ problems }) => {
             </tr>
           </thead>
           <tbody>
-            {paginatedProblems.length > 0 ? (
-              paginatedProblems.map((problem) => {
-                const isSolved = problem.solvedBy.some(
-                  (user) => user.userId === authUser?.id
-                );
+{
+    paginatedProblems.length > 0 ? (
+          paginatedProblems.map((problem)=>{
+            const isSolved = problem.solvedBy.some((user)=>user.userId === authUser?.id);
 
-                return (
+               return (
                   <tr key={problem.id}>
                     <td>
                       <input
@@ -123,10 +120,7 @@ const ProblemTable = ({ problems }) => {
                       />
                     </td>
                     <td>
-                      <Link
-                        to={`/problem/${problem.id}`}
-                        className="font-semibold hover:underline"
-                      >
+                      <Link to={`/problem/${problem.id}`} className="font-semibold hover:underline">
                         {problem.title}
                       </Link>
                     </td>
@@ -175,46 +169,44 @@ const ProblemTable = ({ problems }) => {
                           onClick={() => handleAddToPlaylist(problem.id)}
                         >
                           <Bookmark className="w-4 h-4" />
-                          <span className="hidden sm:inline">
-                            Save to Playlist
-                          </span>
+                          <span className="hidden sm:inline">Save to Playlist</span>
                         </button>
                       </div>
                     </td>
                   </tr>
                 );
-              })
-            ) : (
-              <tr>
+
+          })
+    ) : ( <tr>
                 <td colSpan={5} className="text-center py-6 text-gray-500">
                   No problems found.
                 </td>
-              </tr>
-            )}
+              </tr>)
+}
           </tbody>
         </table>
       </div>
 
-      {/*  */}
-      <div className="flex justify-center mt-6 gap-2">
-        <button
-          className="btn btn-sm"
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage((prev) => prev - 1)}
-        >
-          Prev
-        </button>
-        <span className="btn btn-ghost btn-sm">
+  {/*  */}
+  <div className="flex justify-center mt-6 gap-2">
+<button
+className="btn btn-sm"
+disabled={currentPage === 1}
+onClick={()=>setCurrentPage((prev)=>prev-1)}
+>
+Prev
+</button>
+    <span className="btn btn-ghost btn-sm">
           {currentPage} / {totalPages}
         </span>
-        <button
-          className="btn btn-sm"
-          disabled={currentPage === totalPages}
-          onClick={() => setCurrentPage((prev) => prev + 1)}
-        >
-          Next
-        </button>
-      </div>
+ <button
+className="btn btn-sm"
+disabled={currentPage === totalPages}
+onClick={()=>setCurrentPage((prev)=>prev+1)}
+>
+Next
+</button>
+  </div>
     </div>
   );
 };
