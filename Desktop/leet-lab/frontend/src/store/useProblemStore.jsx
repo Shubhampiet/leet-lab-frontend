@@ -30,7 +30,7 @@ export const useProblemStore = create((set) => ({
       const res = await axiosInstance.get(`/problem/get-problem/${id}`);
 
       set({ problem: res.data.problem });
-    
+
       toast.success(res.data.message);
     } catch (error) {
       toast.error("Error in getting problems");
@@ -47,7 +47,5 @@ export const useProblemStore = create((set) => ({
     } catch (error) {
       toast.error("Error getting solved problems");
     }
-  }
-
-  
+  },
 }));
