@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { useAuthStore } from "./store/useAuthStore";
-import { Home, Loader } from "lucide-react";
+import { Loader } from "lucide-react";
 import Layout from "./layout/Layout";
 
 const App = () => {
@@ -28,7 +28,7 @@ const App = () => {
     <div className="flex flex-col items-center justify-start">
       <Toaster />
       <Routes>
-      <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route
             index
             element={authUser ? <HomePage /> : <Navigate to={"/login"} />}
@@ -39,7 +39,6 @@ const App = () => {
           element={!authUser ? <LoginPage /> : <Navigate to={"/"} />}
         />
         <Route path="/signup" element={<SignUpPage />} />
-
       </Routes>
     </div>
   );

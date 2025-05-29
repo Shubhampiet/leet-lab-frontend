@@ -26,7 +26,6 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log("data", data);
     try {
       await login(data);
     } catch (error) {
